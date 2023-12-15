@@ -6,6 +6,7 @@ COPY src src
 COPY .mvn .mvn
 COPY mvnw .
 COPY pom.xml .
+COPY events.json .
 
 # compile the Java application
 RUN ./mvnw package -Dmvn.test.skip=true
@@ -18,11 +19,11 @@ WORKDIR /app
 COPY --from=builder /src/target/eventmanagement-0.0.1-SNAPSHOT.jar app.jar
 
 ENV PORT=8080
-ENV SPRING_REDIS_HOST=localhost 
-ENV SPRING_REDIS_PORT=1234
+ENV SPRING_REDIS_HOST=127.0.0.1
+ENV SPRING_REDIS_PORT=6379
 ENV SPRING_REDIS_DATABASE=0
-ENV SPRING_REDIS_USERNAME=NOT_SET
-ENV SPRING_REDIS_PASSWORD=NOT_SET
+ENV SPRING_REDIS_USERNAME=
+ENV SPRING_REDIS_PASSWORD=
 
 
 EXPOSE $PORT

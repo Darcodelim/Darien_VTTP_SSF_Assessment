@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.json.Json;
@@ -14,9 +15,12 @@ import jakarta.json.JsonReader;
 import java.util.List;
 
 import vttp.ssf.assessment.eventmanagement.models.Event;
+import vttp.ssf.assessment.eventmanagement.repositories.RedisRepository;
 
 @Service
 public class DatabaseService {
+    @Autowired
+    RedisRepository RedisRepo;
     
     // TODO: Task 1
     List<Event> eventList = null;
@@ -39,7 +43,16 @@ public class DatabaseService {
             })
             .toList();
 
-            
+            for(Event eventRed:eventList)
+            {	
+             	System.out.printf("\n eventId: %d\n eventName: %s\n eventSize: %d\n eventDate: %d\n participants: %d\n",
+             	eventRed.getEventId(),eventRed.getEventName(),eventRed.getEventSize(),eventRed.getEventDate(),eventRed.getParticipants());
+    
+             	//Saving to Redis
+             	RedisRepo.saveRecord(eventRed);
+    
+             }
+
 
             }
             catch (Exception e) {

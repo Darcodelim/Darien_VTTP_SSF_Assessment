@@ -29,25 +29,31 @@ public class EventmanagementApplication implements CommandLineRunner{
 	// TODO: Task 1
 	@Override
 	public void run(String...args)
-	{	String fileName = "C:\\2nd Partition\\VTTP\\NUS-ISS\\Module 2_Server Side Foundation\\vttp_batch4_assessment-main\\events.json";
+	// {
+	{	////for computer
+		String fileName = "C:\\2nd Partition\\VTTP\\NUS-ISS\\Module 2_Server Side Foundation\\vttp_batch4_assessment-main\\events.json";
+
+		// //for dockerising
+		// String fileName = "/src/events.json";
 		List<Event> events = DbSvc.readFile(fileName);
 
-		for(Event event:events)
-		{	
-			System.out.printf("\n eventId: %d\n eventName: %s\n eventSize: %d\n eventDate: %d\n participants: %d\n",
-			event.getEventId(),event.getEventName(),event.getEventSize(),event.getEventDate(),event.getParticipants());
 
-			//Saving to Redis
-			RedisRepo.saveRecord(event);
+		// for(Event event:events)
+		// {	
+		// 	System.out.printf("\n eventId: %d\n eventName: %s\n eventSize: %d\n eventDate: %d\n participants: %d\n",
+		// 	event.getEventId(),event.getEventName(),event.getEventSize(),event.getEventDate(),event.getParticipants());
 
-		}
-		//Task 3
-		int size = RedisRepo.getNumberOfEvents();
-		System.out.printf("\n Number of Events: %s\n",Integer.toString(size));
+		// 	//Saving to Redis
+		// 	RedisRepo.saveRecord(event);
 
-		//Task 4
-		Event event = RedisRepo.getEvent(1);
-		System.out.println(event.getEventName());
+		// }
+		// //Task 3
+		// int size = RedisRepo.getNumberOfEvents();
+		// System.out.printf("\n Number of Events: %s\n",Integer.toString(size));
+
+		// //Task 4
+		// Event event = RedisRepo.getEvent(1);
+		// System.out.println(event.getEventName());
 
 
 	}

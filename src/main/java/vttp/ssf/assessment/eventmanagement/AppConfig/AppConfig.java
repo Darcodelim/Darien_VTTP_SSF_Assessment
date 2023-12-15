@@ -45,10 +45,11 @@ public class AppConfig {
       config.setPort(redisPort);
       config.setDatabase(redisDatabase);
       // Only set the username and passwrd if they are set
-      if (!"NOT_SET".equals(redisUser.trim())) {
-         config.setUsername(redisUser);
-         config.setPassword(redisPassword);
-      }
+		if (redisUser.trim().length() > 0) {
+			config.setUsername(redisUser);
+			config.setPassword(redisPassword);
+		}
+
 
       logger.log(Level.INFO, "Using Redis database %d".formatted(redisPort));
       logger.log(Level.INFO
