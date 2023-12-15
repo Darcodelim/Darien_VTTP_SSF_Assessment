@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    
+</head>
+<body>
+    <h1>List of Events</h1>
+    <table class="table table-striped">
+        <thead>
+            <th scope ="col">Event ID</th>
+            <th scope ="col">Event Name</th>
+            <th scope ="col">Event Size</th>
+            <th scope ="col">Event Date</th>
+            <th scope ="col">Action</th>
+
+    </thead>
+    <div>
+        <form method ="GET" >
+        <tr data-th-each="event:${events}" >
+            <td data-th-text = "${#strings.toString(event.eventId)}" ></td>
+            <td data-th-text = "${#strings.toString(event.eventName)}" data-th-value="${event.eventName}" data-th-name="eventName"></td>
+            <td data-th-text = "${#strings.toString(event.eventSize)}"></td>
+            <td data-th-text = "${#dates.format(event.eventDate,'dd/MM/yyyy')}"  data-th-value="${#dates.format(event.eventDate,'dd/MM/yyyy')}" name= "eventDate"></td>
+            <td><button type = 'submit' formaction="/register">Register</button></td>
+            <!-- data-th-value="${#strings.toString(event.eventId)}" name ="eventName"
+            data-th-value="${#dates.format(event.eventDate,'dd/MM/yyyy')}" name= "eventDate" -->
+        </tr>
+        </form>
+    </div>
+    </table>
+</body>
+</html>
